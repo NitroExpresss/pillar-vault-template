@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Рассвет: тёмное индиго, тлеющий тёплый горизонт, солнце встаёт слева внизу.
+     Тема только тёмная. Слои как в приложении: градиент неба, пятно солнца,
+     стеклянная вуаль — вуаль держит контраст светлых чернил. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient android:angle="270" android:startColor="#0A1022" android:centerColor="#2A2340" android:endColor="#5A3A3E" />
+            <corners android:radius="22dp" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient android:type="radial" android:centerX="0.14" android:centerY="0.98" android:gradientRadius="190dp"
+                android:startColor="#80FFD6AA" android:centerColor="#38FFA06E" android:endColor="#00FFFFFF" />
+            <corners android:radius="22dp" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#7310101E" />
+            <stroke android:width="1dp" android:color="#1FFFFFFF" />
+            <corners android:radius="22dp" />
+        </shape>
+    </item>
+</layer-list>

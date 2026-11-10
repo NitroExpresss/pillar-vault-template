@@ -1,0 +1,105 @@
+/* Форма входа: небо по времени суток, мягкое солнце, дождь матрицы и одна
+   стеклянная карточка. Палитра — та же, что у приложения (web/src/styles.css),
+   но отдельным файлом: приложение гостю не отдаётся. */
+
+/* Только тёмная тема: все фазы неба тёмные, как в приложении (web/src/styles.css). */
+:root, [data-sky="day"] {
+  --sky-1: #071526; --sky-2: #0f2a3d; --sky-3: #173f46;
+  --sun-core: rgba(255, 236, 200, 0.42); --sun-glow: rgba(255, 200, 140, 0.16); --sun-x: 78%; --sun-y: -6%; --sun-size: 560px;
+  --ink: #e6f2ea; --ink-soft: #a7bdb3; --glass: rgba(8, 20, 30, 0.58); --glass-edge: rgba(120, 255, 180, 0.12);
+  --field: rgba(14, 30, 42, 0.85); --action: #3ee08a; --on-action: #03110a; --ember: #ff7a57;
+  --rain: rgba(62, 224, 138, 0.95); --rain-opacity: 0.32;
+}
+[data-sky="dawn"] {
+  --sky-1: #0a1022; --sky-2: #2a2340; --sky-3: #5a3a3e;
+  --sun-core: rgba(255, 214, 170, 0.5); --sun-glow: rgba(255, 160, 110, 0.22); --sun-x: 18%; --sun-y: 62%; --sun-size: 620px;
+  --glass: rgba(16, 14, 30, 0.58); --field: rgba(26, 22, 44, 0.85); --rain-opacity: 0.34;
+}
+[data-sky="dusk"] {
+  --sky-1: #1c2a50; --sky-2: #5e4a78; --sky-3: #e58f64; --sun-core: rgba(255, 226, 180, 1); --sun-glow: rgba(255, 140, 90, 0.55); --sun-x: 82%; --sun-y: 70%;
+  --ink: #f1f4ef; --ink-soft: #c9d0d8; --glass: rgba(22, 24, 44, 0.5); --glass-edge: rgba(255, 255, 255, 0.14); --field: rgba(30, 32, 56, 0.75);
+  --action: #4fd18e; --on-action: #07140d; --ember: #ff8a66; --rain: rgba(110, 240, 160, 0.9); --rain-opacity: 0.3;
+}
+[data-sky="night"] {
+  --sky-1: #04080f; --sky-2: #08161a; --sky-3: #0d2a21; --sun-core: rgba(190, 215, 255, 0.16); --sun-glow: rgba(120, 170, 230, 0.08); --sun-x: 80%; --sun-y: 8%; --sun-size: 260px;
+  --ink: #e6f2ea; --ink-soft: #a7bdb3; --glass: rgba(8, 18, 20, 0.58); --glass-edge: rgba(120, 255, 180, 0.12); --field: rgba(14, 28, 30, 0.85);
+  --action: #3ee08a; --on-action: #03110a; --ember: #ff7a57; --rain: rgba(62, 224, 138, 0.95); --rain-opacity: 0.45;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: var(--sky-1);
+  color: var(--ink);
+  font: 15px/1.55 "JetBrains Mono", ui-monospace, monospace;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+::selection { background: color-mix(in srgb, var(--action) 30%, transparent); }
+
+.sky { position: fixed; inset: 0; overflow: hidden; background: linear-gradient(180deg, var(--sky-1), var(--sky-2) 55%, var(--sky-3)); }
+.sun {
+  position: absolute; left: var(--sun-x); top: var(--sun-y); width: var(--sun-size); aspect-ratio: 1; translate: -50% -50%; border-radius: 50%;
+  background: radial-gradient(circle, var(--sun-core) 0 14%, var(--sun-glow) 36%, transparent 68%);
+  animation: sunrise 2.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+@keyframes sunrise { from { opacity: 0; transform: translateY(60px) scale(0.85); } }
+.rain { position: absolute; inset: 0; width: 100%; height: 100%; opacity: var(--rain-opacity); }
+
+.gate { position: relative; min-height: 100dvh; display: grid; place-items: center; padding: 24px 16px; }
+.gate-card {
+  width: min(420px, 100%);
+  padding: 28px 26px 24px;
+  border: 1px solid var(--glass-edge);
+  border-radius: 26px;
+  background: var(--glass);
+  backdrop-filter: blur(18px) saturate(1.3);
+  box-shadow: 0 24px 60px -28px rgba(0, 0, 0, 0.5);
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
+}
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+.gate-card h1 { margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
+.gate-lead { margin: 6px 0 20px; color: var(--ink-soft); font-size: 14px; }
+
+/* ключ не виден: вместо букв бегут символы матрицы, каретка стоит на месте */
+.gate-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 0 14px;
+  border: 1px solid var(--glass-edge);
+  border-radius: 16px;
+  background: var(--field);
+  cursor: text;
+}
+.gate-field:focus-within { border-color: var(--action); }
+.gate-prompt { color: var(--action); font-weight: 700; }
+.gate-slots { font-size: 16px; letter-spacing: 3px; color: var(--action); white-space: nowrap; overflow: hidden; }
+.gate-caret { flex: none; width: 9px; height: 20px; background: var(--action); animation: blink 1.05s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.gate-input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; border: 0; cursor: text; font-size: 16px; }
+
+.gate-status { min-height: 22px; margin: 10px 0 0; font-size: 13.5px; }
+.gate-status.deny { color: var(--ember); }
+.gate-go {
+  width: 100%;
+  margin-top: 6px;
+  padding: 13px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--action);
+  color: var(--on-action);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+.gate-go:hover { filter: brightness(1.08); }
+:focus-visible { outline: 2px solid var(--action); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+}

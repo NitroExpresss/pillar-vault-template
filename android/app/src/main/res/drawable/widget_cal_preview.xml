@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Превью (тёмное небо) календаря в списке виджетов: шапка и сетка с метками. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="250dp" android:height="250dp" android:viewportWidth="250" android:viewportHeight="250">
+    <path android:fillColor="#FF0D1A24" android:strokeColor="#1F78FFB4" android:strokeWidth="1" android:pathData="M16,0.5 h218 a15.5,15.5 0 0 1 15.5,15.5 v218 a15.5,15.5 0 0 1 -15.5,15.5 h-218 a15.5,15.5 0 0 1 -15.5,-15.5 v-218 a15.5,15.5 0 0 1 15.5,-15.5 z"/>
+    <path android:fillColor="#8EE4AF" android:pathData="M90,16 h70 v7 h-70 z"/>
+    <path android:fillColor="#14FFFFFF" android:pathData="M12,42 h29 v36 h-29 z M44.5,42 h29 v36 h-29 z M77,42 h29 v36 h-29 z M109.5,42 h29 v36 h-29 z M142,42 h29 v36 h-29 z M174.5,42 h29 v36 h-29 z M207,42 h29 v36 h-29 z M12,82 h29 v36 h-29 z M44.5,82 h29 v36 h-29 z M77,82 h29 v36 h-29 z M109.5,82 h29 v36 h-29 z M142,82 h29 v36 h-29 z M174.5,82 h29 v36 h-29 z M207,82 h29 v36 h-29 z M12,122 h29 v36 h-29 z M44.5,122 h29 v36 h-29 z M77,122 h29 v36 h-29 z M109.5,122 h29 v36 h-29 z M142,122 h29 v36 h-29 z M174.5,122 h29 v36 h-29 z M207,122 h29 v36 h-29 z M12,162 h29 v36 h-29 z M44.5,162 h29 v36 h-29 z M77,162 h29 v36 h-29 z M109.5,162 h29 v36 h-29 z M142,162 h29 v36 h-29 z M174.5,162 h29 v36 h-29 z M207,162 h29 v36 h-29 z M12,202 h29 v36 h-29 z M44.5,202 h29 v36 h-29 z M77,202 h29 v36 h-29 z M109.5,202 h29 v36 h-29 z M142,202 h29 v36 h-29 z M174.5,202 h29 v36 h-29 z M207,202 h29 v36 h-29 z"/>
+    <path android:fillColor="#243EE08A" android:strokeColor="#993EE08A" android:strokeWidth="1" android:pathData="M109.5,82 h29 v36 h-29 z"/>
+    <path android:fillColor="#D9A48A" android:pathData="M173,110 a2.5,2.5 0 1 0 0.1,0 z M75,150 a2.5,2.5 0 1 0 0.1,0 z"/>
+    <path android:fillColor="#3EE08A" android:pathData="M42,70 a2.5,2.5 0 1 0 0.1,0 z M124,110 a2.5,2.5 0 1 0 0.1,0 z M205,190 a2.5,2.5 0 1 0 0.1,0 z"/>
+</vector>

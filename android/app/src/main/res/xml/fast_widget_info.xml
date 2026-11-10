@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Полоса 4×2: кольцо и неделя окон. Растягивается — неделя перерисуется под размер. -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/widget_fast_description"
+    android:initialLayout="@layout/widget_fast"
+    android:minWidth="250dp"
+    android:minHeight="150dp"
+    android:minResizeWidth="180dp"
+    android:minResizeHeight="140dp"
+    android:previewImage="@drawable/widget_fast_preview"
+    android:resizeMode="horizontal|vertical"
+    android:targetCellWidth="4"
+    android:targetCellHeight="2"
+    android:updatePeriodMillis="1800000"
+    android:widgetCategory="home_screen" />

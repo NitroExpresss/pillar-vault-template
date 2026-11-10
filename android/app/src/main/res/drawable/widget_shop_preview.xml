@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Превью (тёмное небо) «Покупок»: шапка с «+» и список с квадратами «куплено». -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="250dp"
+    android:height="110dp"
+    android:viewportWidth="250"
+    android:viewportHeight="110">
+    <path android:fillColor="#FF0D1A24" android:strokeColor="#1F78FFB4" android:strokeWidth="1"
+        android:pathData="M16,0.5 h218 a15.5,15.5 0 0 1 15.5,15.5 v78 a15.5,15.5 0 0 1 -15.5,15.5 h-218 a15.5,15.5 0 0 1 -15.5,-15.5 v-78 a15.5,15.5 0 0 1 15.5,-15.5 z" />
+    <path android:fillColor="#8EE4AF" android:pathData="M14,12 h52 v6 h-52 z" />
+    <path android:fillColor="#3EE08A" android:pathData="M206,14 h10 v2 h-10 z M210,10 h2 v10 h-2 z" />
+    <path android:strokeColor="#3EE08A" android:strokeWidth="1.5" android:pathData="M15,35 h12 v12 h-12 z M15,60 h12 v12 h-12 z M15,85 h12 v12 h-12 z" />
+    <path android:fillColor="#E6F2EA" android:pathData="M36,39 h80 v5 h-80 z M36,64 h110 v5 h-110 z M36,89 h70 v5 h-70 z" />
+    <path android:fillColor="#A7BDB3" android:pathData="M206,39 h28 v5 h-28 z M206,89 h28 v5 h-28 z" />
+</vector>

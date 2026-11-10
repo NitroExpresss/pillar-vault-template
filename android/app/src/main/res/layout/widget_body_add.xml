@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Окно «+ замер» виджета «Тело»: поля по колонкам таблицы замеров
+     (их создаёт BodyAdd по ответу body.json), дата — сегодня. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/madd_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/widget_bg_night"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/madd_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/madd_title"
+        android:textColor="#8EE4AF"
+        android:textSize="17sp" />
+
+    <LinearLayout
+        android:id="@+id/madd_fields"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical" />
+
+    <TextView
+        android:id="@+id/madd_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/widget_loading"
+        android:textColor="#7B9476"
+        android:textSize="13sp" />
+
+    <Button
+        android:id="@+id/madd_go"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:background="#5CDB95"
+        android:enabled="false"
+        android:text="@string/madd_go"
+        android:textColor="#0A0C0B"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+</LinearLayout>

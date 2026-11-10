@@ -1,0 +1,13 @@
+# Право перезапускать одну службу — и только её.
+#
+# Прежде деплой ходил под пользователем из группы docker, а членство в ней
+# в Linux равносильно root: контейнером с примонтированным / можно всё.
+# Здесь разрешены три глагола над одним юнитом, без пароля.
+#
+# Установка (проверка обязательна: опечатка в sudoers закрывает sudo всем):
+#   sudo install -m 0440 -o root -g root \
+#        /opt/pillar-vault/deploy/pillar-vault.sudoers /etc/sudoers.d/pillar-vault
+#   sudo visudo -c
+#
+# ⚠ ЗАМЕНИ deploy на пользователя, которому принадлежит /opt/pillar-vault.
+deploy ALL=(root) NOPASSWD: /usr/bin/systemctl restart pillar-vault.service, /usr/bin/systemctl start pillar-vault.service, /usr/bin/systemctl stop pillar-vault.service

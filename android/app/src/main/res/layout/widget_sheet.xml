@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Окно поверх рабочего стола для чтения: день календаря (DayView) и
+     карточка из «Важного» (CardView). Заголовок, прокручиваемое тело,
+     необязательное поле ввода и «Открыть в приложении». Цвета — по небу. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sheet_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/widget_bg_night"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/sheet_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#8EE4AF"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/sheet_sub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textColor="#A7BDB3"
+        android:textSize="13sp"
+        android:visibility="gone" />
+
+    <!-- высоту ограничивает код: окно не должно закрыть весь экран -->
+    <ScrollView
+        android:id="@+id/sheet_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fadeScrollbars="false">
+
+        <LinearLayout
+            android:id="@+id/sheet_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/sheet_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/sheet_text"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:inputType="textCapSentences"
+            android:maxLength="300"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:singleLine="true"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/sheet_go"
+            android:layout_width="52dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:contentDescription="@string/add_go"
+            android:text="+"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/sheet_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="13sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/sheet_open"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:text="@string/sheet_open"
+        android:textSize="14sp" />
+</LinearLayout>

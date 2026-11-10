@@ -1,0 +1,80 @@
+plugins {
+    id "com.android.application"
+}
+
+// Адрес хранилища. Переопределяется без правки кода:  gradle assembleRelease -PvaultUrl=https://...
+def vaultUrl = project.findProperty("vaultUrl") ?: "https://vault.example.com/"
+
+// Номер сборки растёт сам: в CI это номер прогона, локально — 1.
+// Свежая сборка нужна для «Обновить приложение»: сервер отдаёт APK с
+// версией выше установленной, и телефон сам предлагает обновиться.
+def buildNumber = (System.getenv("GITHUB_RUN_NUMBER") ?: "1") as Integer
+
+// Имя версии — тройками: цифры только 3, 6, 9. Счёт идёт 3, 6, 9, 33, 36,
+// 39, 63… (биективная троичная нумерация номера сборки), для чтения —
+// группы по три цифры через точку: 369.369.369.
+def triVersion = { int n ->
+    String digits = ""
+    while (n > 0) {
+        int r = n % 3 == 0 ? 3 : n % 3
+        digits = "369"[r - 1] + digits
+        n = (n - r).intdiv(3)
+    }
+    def parts = []
+    while (digits.length() > 3) {
+        parts.add(0, digits.substring(digits.length() - 3))
+        digits = digits.substring(0, digits.length() - 3)
+    }
+    parts.add(0, digits)
+    parts.join(".")
+}
+
+android {
+    namespace "app.pillarvault"
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "app.pillarvault"
+        minSdk 26
+        // 34, а не 35: на 35 Android 15 навязывает отрисовку под системными панелями
+        targetSdk 34
+        versionCode buildNumber
+        versionName triVersion(buildNumber)
+        buildConfigField "String", "VAULT_URL", "\"${vaultUrl}\""
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    // Ключ приходит из окружения (секреты CI). Без него релиз подписывается
+    // отладочным ключом — поставится, но обновлять поверх придётся с удалением.
+    def ks = System.getenv("PV_KEYSTORE")
+    signingConfigs {
+        if (ks) {
+            vault {
+                storeFile file(ks)
+                storePassword System.getenv("PV_KEYSTORE_PASS")
+                keyAlias "pillar"
+                keyPassword System.getenv("PV_KEYSTORE_PASS")
+                storeType "pkcs12"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig ks ? signingConfigs.vault : signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+}

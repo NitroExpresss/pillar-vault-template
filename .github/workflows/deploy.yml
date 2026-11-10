@@ -1,0 +1,101 @@
+# Мгновенный пинок VDS после push в main.
+#
+# Надёжная основа автодеплоя — systemd-таймер на самом сервере
+# (deploy/pillar-vault-deploy.timer). Этот workflow только ускоряет: он делает
+# то же самое, но сразу. Поэтому его падение не страшно — следующий такт
+# таймера всё равно подтянет изменения.
+#
+# Секреты: Settings → Secrets and variables → Actions.
+#   VDS_HOST         адрес сервера
+#   VDS_USER         пользователь, которому принадлежит /opt/pillar-vault
+#   VDS_SSH_KEY      приватный ключ целиком, вместе со строками BEGIN/END
+#   VDS_KNOWN_HOSTS  вывод `ssh-keyscan -p 22 адрес` — без него ssh не отличит
+#                    твой сервер от подмены по дороге
+#   VDS_PORT         необязательно, по умолчанию 22
+# Пока VDS_HOST не задан, workflow тихо пропускает себя и не красит push.
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Деплои выстраиваются в очередь, а не отменяют друг друга на полпути:
+# оборванная пересборка образа хуже, чем лишняя минута ожидания.
+concurrency:
+  group: deploy-vds
+  cancel-in-progress: false
+
+jobs:
+  # Проверка кода и хранилища. Не декорация: пинок на прод ждёт её.
+  # Оговорка честная — суточный таймер на VDS тянет git сам и этой проверки
+  # не видит, поэтому тот же набор гоняет и deploy.sh перед подменой бинаря.
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          # не пин: жёсткая версия падает ровно в тот день, когда её ещё нет
+          # в манифесте setup-go или уже нет в списке. Сервер собирается
+          # тем, что стоит на VDS; здесь важно, что код проходит проверки.
+          go-version: 'stable'
+          cache: false
+      - name: Формат
+        run: |
+          unformatted=$(gofmt -l server/)
+          if [ -n "$unformatted" ]; then
+            echo "::error::не по gofmt: $unformatted"
+            exit 1
+          fi
+      - name: Vet
+        run: go vet ./...
+      - name: Тесты (с детектором гонок — здесь есть cgo, в отличие от VDS)
+        run: go test ./... -count=1 -race
+      - name: Линтер хранилища
+        run: go run ./server -root . -lint
+
+  vds:
+    needs: check
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - id: guard
+        name: Секреты заданы?
+        env:
+          HOST: ${{ secrets.VDS_HOST }}
+        run: |
+          if [ -z "$HOST" ]; then
+            echo "::notice::VDS_HOST не задан — пинок пропущен, таймер на сервере подтянет сам"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Ключ и known_hosts
+        if: steps.guard.outputs.skip != 'true'
+        env:
+          KEY: ${{ secrets.VDS_SSH_KEY }}
+          KNOWN: ${{ secrets.VDS_KNOWN_HOSTS }}
+        run: |
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$KEY" > ~/.ssh/id_deploy
+          printf '%s\n' "$KNOWN" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/id_deploy ~/.ssh/known_hosts
+          if [ ! -s ~/.ssh/known_hosts ]; then
+            echo "::error::VDS_KNOWN_HOSTS пуст. Возьми его так: ssh-keyscan -p 22 адрес-сервера"
+            exit 1
+          fi
+
+      - name: Пинок
+        if: steps.guard.outputs.skip != 'true'
+        env:
+          VDS_HOST: ${{ secrets.VDS_HOST }}
+          VDS_USER: ${{ secrets.VDS_USER }}
+          VDS_PORT: ${{ secrets.VDS_PORT }}
+        run: |
+          ssh -i ~/.ssh/id_deploy -p "${VDS_PORT:-22}" \
+              -o IdentitiesOnly=yes \
+              -o StrictHostKeyChecking=yes \
+              -o ConnectTimeout=15 \
+              "$VDS_USER@$VDS_HOST" \
+              'bash /opt/pillar-vault/deploy/deploy.sh'

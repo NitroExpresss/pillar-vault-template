@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Превью (тёмное небо) в списке виджетов: шапка «Сегодня» и три дела с квадратами.
+     Лаунчеры Xiaomi без картинки показывают пустую плитку — не найти. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="250dp"
+    android:height="110dp"
+    android:viewportWidth="250"
+    android:viewportHeight="110">
+    <path android:fillColor="#FF0D1A24" android:strokeColor="#1F78FFB4" android:strokeWidth="1"
+        android:pathData="M16,0.5 h218 a15.5,15.5 0 0 1 15.5,15.5 v78 a15.5,15.5 0 0 1 -15.5,15.5 h-218 a15.5,15.5 0 0 1 -15.5,-15.5 v-78 a15.5,15.5 0 0 1 15.5,-15.5 z" />
+    <!-- шапка -->
+    <path android:fillColor="#8EE4AF" android:pathData="M14,12 h52 v6 h-52 z" />
+    <path android:fillColor="#A7BDB3" android:pathData="M74,13 h60 v4 h-60 z" />
+    <path android:fillColor="#3EE08A" android:pathData="M228,10 a5,5 0 1 0 0.1,0 z" />
+    <!-- дела -->
+    <path android:strokeColor="#3EE08A" android:strokeWidth="1.5" android:pathData="M15,35 h12 v12 h-12 z M15,60 h12 v12 h-12 z M15,85 h12 v12 h-12 z" />
+    <path android:fillColor="#E6F2EA" android:pathData="M36,39 h120 v5 h-120 z M36,64 h150 v5 h-150 z M36,89 h95 v5 h-95 z" />
+    <path android:fillColor="#D9A48A" android:pathData="M206,64 h28 v5 h-28 z" />
+</vector>

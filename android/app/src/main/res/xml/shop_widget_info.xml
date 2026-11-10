@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Сжать можно до одной клетки в высоту — тогда виджет показывает суть строкой (Compact). -->
+<!-- Новый виджет — на весь экран: 4×5 клеток (на сетках 4×6 и 5×6 это почти
+     весь экран, лаунчер кладёт такой на свободный, обычно новый экран).
+     Не влезает — Android берёт minWidth/minHeight. Сжать можно как раньше. -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/widget_shop_description"
+    android:initialLayout="@layout/widget_shop"
+    android:minWidth="250dp"
+    android:minHeight="300dp"
+    android:minResizeWidth="110dp"
+    android:minResizeHeight="40dp"
+    android:previewImage="@drawable/widget_shop_preview"
+    android:resizeMode="horizontal|vertical"
+    android:targetCellWidth="4"
+    android:targetCellHeight="5"
+    android:updatePeriodMillis="1800000"
+    android:widgetCategory="home_screen" />

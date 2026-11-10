@@ -1,0 +1,26 @@
+[Unit]
+Description=Pillar Vault — подтянуть хранилище из git и обновить службу
+Documentation=file:/opt/pillar-vault/deploy/DEPLOY.md
+# Сеть нужна для git pull; саму службу скрипт поднимет сам, если та лежит
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+
+# ⚠ ЗАМЕНИ на пользователя, которому принадлежит /opt/pillar-vault.
+# Ему же нужно право перезапускать службу — правило в /etc/sudoers.d/pillar-vault
+# (см. DEPLOY.md). Одной командой при установке:
+#   sudo sed -i "s/^User=.*/User=$USER/" /etc/systemd/system/pillar-vault-deploy.service
+User=pillar
+
+WorkingDirectory=/opt/pillar-vault
+ExecStart=/bin/bash /opt/pillar-vault/deploy/deploy.sh
+
+# Сборка Go на одном ядре укладывается в минуту, но вечно висеть и держать
+# замок нельзя
+TimeoutStartSec=600
+
+# Читается через: journalctl -u pillar-vault-deploy
+StandardOutput=journal
+StandardError=journal

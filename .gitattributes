@@ -1,0 +1,8 @@
+# Shell-скрипты всегда с LF — иначе bash на Linux-VDS падает на CRLF (\r)
+*.sh text eol=lf
+deploy/deploy.sh text eol=lf
+# nginx-конфиг тоже Linux-сторона
+*.conf text eol=lf
+# systemd-юниты читает Linux — CRLF ломает разбор
+*.service text eol=lf
+*.timer text eol=lf

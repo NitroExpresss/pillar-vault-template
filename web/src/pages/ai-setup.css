@@ -1,0 +1,100 @@
+/* ── первое подключение ИИ (вкладка «ИИ», когда шлюзов нет) ──
+   Мастер ключа: провайдер → ключ → «Проверить и подключить».
+   Анимации: спиннер в кнопке на время живой проверки, тряска поля
+   при отказе, прорисовка галки при успехе. Общие переменные — styles.css. */
+
+.ai-setup { display: grid; gap: 16px; max-width: 520px; margin: 6vh auto 0; justify-items: start; }
+.ai-setup h1 { margin: 0; font: 600 24px/1.25 var(--display); letter-spacing: -0.015em; }
+.ai-setup > p { margin: 0; color: var(--ink-soft); font-size: 14.5px; }
+
+/* выбор провайдера: карточки-строки, выбранная — с кромкой действия */
+.ai-provs { display: grid; gap: 8px; width: 100%; }
+.ai-prov {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--glass-edge);
+  border-radius: 14px;
+  background: var(--glass-strong);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.ai-prov:hover { border-color: var(--action); }
+.ai-prov.on { border-color: var(--action); background: color-mix(in srgb, var(--action) 12%, var(--glass-strong)); }
+.ai-prov b { font-weight: 600; }
+.ai-prov small { font: 12px var(--mono); color: var(--ink-soft); }
+
+/* ключ: моноширинное поле + показать/скрыть; .shake — отказ проверки */
+.ai-key { display: flex; gap: 8px; width: 100%; }
+.ai-key input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--glass-edge);
+  border-radius: 14px;
+  background: var(--glass-strong);
+  color: var(--ink);
+  font: 15px var(--mono);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.ai-key input:focus { border-color: var(--action); }
+.ai-key .ghost { flex: none; }
+.ai-key.shake { animation: ai-shake 0.45s; }
+@keyframes ai-shake {
+  20% { transform: translateX(-7px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(3px); }
+}
+
+.ai-setup-err { margin: 0; color: var(--ember); font-size: 14px; animation: toast-in 0.3s var(--ease); }
+.ai-setup-note { font-size: 13px !important; }
+.ai-setup-note a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
+
+/* спиннер внутри кнопки на время живой проверки */
+.ai-spin {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 8px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  vertical-align: -2px;
+  animation: ai-rot 0.7s linear infinite;
+}
+@keyframes ai-rot { to { transform: rotate(360deg); } }
+
+/* успех: окружность и галка прорисовываются штрихом */
+.ai-setup-done { display: grid; justify-items: center; gap: 10px; width: 100%; padding: 28px 0 8px; text-align: center; }
+.ai-setup-done p { margin: 0; font-weight: 600; color: var(--accent-text); }
+.ai-setup-mark { width: 64px; height: 64px; }
+.ai-setup-mark circle {
+  fill: none;
+  stroke: var(--action);
+  stroke-width: 2.5;
+  stroke-dasharray: 151;
+  stroke-dashoffset: 151;
+  animation: ai-draw 0.6s var(--ease) forwards;
+}
+.ai-setup-mark path {
+  fill: none;
+  stroke: var(--action);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 34;
+  stroke-dashoffset: 34;
+  animation: ai-draw 0.35s var(--ease) 0.5s forwards;
+}
+@keyframes ai-draw { to { stroke-dashoffset: 0; } }
+
+@media (max-width: 820px) {
+  .ai-setup { margin-top: 12px; }
+  .ai-key input { font-size: 16px; } /* 16px — без автозума при фокусе */
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Превью (тёмное небо) «Тела» в списке виджетов: вес, полоса к цели и линия графика. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="320dp"
+    android:height="180dp"
+    android:viewportWidth="320"
+    android:viewportHeight="180">
+    <path android:fillColor="#FF0D1A24" android:strokeColor="#1F78FFB4" android:strokeWidth="1"
+        android:pathData="M16,0.5 h288 a15.5,15.5 0 0 1 15.5,15.5 v148 a15.5,15.5 0 0 1 -15.5,15.5 h-288 a15.5,15.5 0 0 1 -15.5,-15.5 v-148 a15.5,15.5 0 0 1 15.5,-15.5 z" />
+    <path android:fillColor="#8EE4AF" android:pathData="M14,12 h40 v6 h-40 z" />
+    <path android:fillColor="#E6F2EA" android:pathData="M14,34 h70 v16 h-70 z" />
+    <path android:fillColor="#A7BDB3" android:pathData="M92,42 h90 v6 h-90 z" />
+    <path android:fillColor="#26A7BDB3" android:pathData="M14,58 h292 v5 h-292 z" />
+    <path android:fillColor="#3EE08A" android:pathData="M14,58 h95 v5 h-95 z" />
+    <path android:strokeColor="#26A7BDB3" android:strokeWidth="1" android:pathData="M40,80 h266 M40,115 h266 M40,150 h266" />
+    <path android:strokeColor="#E0B65A" android:strokeWidth="2.5" android:strokeLineCap="round" android:strokeLineJoin="round"
+        android:pathData="M42,84 L90,98 L140,108 L190,122 L240,131 L290,144" />
+    <path android:fillColor="#E0B65A" android:pathData="M290,140 a4,4 0 1 0 0.1,0 z" />
+</vector>

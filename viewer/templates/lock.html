@@ -1,0 +1,41 @@
+{{/* Форма входа — единственная страница, которую рисует Go. Отдельная, а не
+     наложение поверх интерфейса: за ней пусто — сервер без сессии не отдаёт
+     ни карточки, ни файлов приложения. Небо, солнце и дождь — те же, что в
+     приложении («Рассвет над кодом»), но своими маленькими gate.css/gate.js. */}}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Pillar Vault — вход</title>
+  <link rel="stylesheet" href="/fonts.css" />
+  <link rel="stylesheet" href="/gate.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>" />
+  <script>
+    // фаза неба до первой отрисовки — без вспышки дневного неба ночью
+    (function () {
+      var h = new Date().getHours();
+      document.documentElement.dataset.sky = h >= 5 && h < 8 ? "dawn" : h >= 8 && h < 18 ? "day" : h >= 18 && h < 22 ? "dusk" : "night";
+    })();
+  </script>
+</head>
+<body>
+  <div class="sky" aria-hidden="true"><div class="sun"></div><canvas class="rain"></canvas></div>
+  <main class="gate">
+    <form class="gate-card" method="post" action="/login" autocomplete="off">
+      {{with .Next}}<input type="hidden" name="next" value="{{.}}" />{{end}}
+      <h1>Pillar Vault</h1>
+      <p class="gate-lead">Личный сад и командный центр. Введите ключ.</p>
+      <label class="gate-field">
+        <span class="gate-prompt" aria-hidden="true">&gt;</span>
+        <span class="gate-slots" aria-hidden="true"></span><span class="gate-caret" aria-hidden="true"></span>
+        <input class="gate-input" type="password" name="password" aria-label="Ключ доступа" autocomplete="current-password"
+               autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="128" autofocus required />
+      </label>
+      <p class="gate-status{{if .Notice}} deny{{end}}" role="status">{{.Notice}}</p>
+      <button class="gate-go" type="submit">Войти</button>
+    </form>
+  </main>
+  <script src="/gate.js" defer></script>
+</body>
+</html>

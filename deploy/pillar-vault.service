@@ -1,0 +1,65 @@
+[Unit]
+Description=Pillar Vault — хранилище знаний хозяина
+Documentation=file:/opt/pillar-vault/deploy/DEPLOY.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+
+# ⚠ ЗАМЕНИ на пользователя, которому принадлежит /opt/pillar-vault.
+# Одной командой при установке:
+#   sudo sed -i "s/^User=.*/User=$USER/;s/^Group=.*/Group=$(id -gn)/" \
+#        /etc/systemd/system/pillar-vault.service
+User=deploy
+Group=deploy
+
+WorkingDirectory=/opt/pillar-vault
+# Слушаем только петлю: наружу смотрит nginx, а не сервер хранилища.
+ExecStart=/opt/pillar-vault/server/pillar-vault-server -root /opt/pillar-vault -addr 127.0.0.1:8080
+
+# Пароль сервер читает сам из server/.passhash (0600, вне git).
+# Ни в окружении юнита, ни в argv его нет: /proc/PID/environ не место
+# для ключа от хранилища.
+
+Restart=always
+RestartSec=5
+
+# ── песочница ─────────────────────────────────────────────────────────
+# Прежде процесс жил в distroless-контейнере. Здесь то же самое делает
+# systemd: файловая система только для чтения, кроме самого хранилища;
+# сеть — только петля; повысить права нечем.
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/pillar-vault
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectControlGroups=true
+ProtectClock=true
+ProtectHostname=true
+ProtectProc=invisible
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+SystemCallFilter=~@privileged @resources
+RestrictAddressFamilies=AF_INET AF_INET6
+
+# Хранилище закрыто и наружу не ходит: исходящие соединения ему не нужны,
+# входящие приходят от nginx с этой же машины.
+IPAddressDeny=any
+IPAddressAllow=localhost
+
+# Читается через: journalctl -u pillar-vault -f
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

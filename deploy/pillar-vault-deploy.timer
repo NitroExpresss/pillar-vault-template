@@ -1,0 +1,15 @@
+[Unit]
+Description=Pillar Vault — регулярная проверка обновлений
+Documentation=file:/opt/pillar-vault/deploy/DEPLOY.md
+
+[Timer]
+# Раз в сутки в тихий час. Быстрый путь — workflow сразу после push;
+# таймер остаётся страховкой на случай, когда Actions недоступны.
+OnCalendar=*-*-* 04:00:00
+# Чтобы такты не сходились в одну секунду с другими таймерами системы
+RandomizedDelaySec=5min
+# Сервер лежал в 04:00 — при старте догоняем один пропущенный такт, а не все
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,9 @@
+.gradle/
+build/
+local.properties
+*.iml
+.idea/
+# ключ подписи — только в секретах GitHub и в локальной копии
+.keystore/
+*.p12
+*.jks

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- «Обновить приложение» в меню: ставит свежий APK с хранилища поверх -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+    <application
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:theme="@style/Vault"
+        android:allowBackup="false"
+        android:networkSecurityConfig="@xml/network_security">
+
+        <!-- configChanges: поворот и клавиатура не перезагружают страницу с несохранённой правкой -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboard|keyboardHidden|navigation|uiMode|density">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- нажатия по строкам виджета: без окна, своя задача — приложение не всплывает -->
+        <activity
+            android:name=".WidgetAction"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:taskAffinity=""
+            android:theme="@android:style/Theme.NoDisplay" />
+
+        <!-- окно «+» виджета: своё дело или из всех; поверх рабочего стола -->
+        <activity
+            android:name=".WidgetAdd"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:taskAffinity=""
+            android:theme="@style/VaultDialog"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+
+        <!-- окна чтения поверх рабочего стола: день календаря и карточка из «Важного» -->
+        <activity
+            android:name=".DayView"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:taskAffinity=""
+            android:theme="@style/VaultDialog"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".CardView"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:taskAffinity=""
+            android:theme="@style/VaultDialog" />
+
+        <!-- окно «+ замер» виджета «Тело» -->
+        <activity
+            android:name=".BodyAdd"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:taskAffinity=""
+            android:theme="@style/VaultDialog"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+
+        <!-- виджет «Сегодня» на рабочем столе -->
+        <receiver
+            android:name=".TodayWidget"
+            android:exported="true"
+            android:label="@string/widget_title">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/today_widget_info" />
+        </receiver>
+
+        <!-- виджет «Календарь»: месяц с метками хранилища -->
+        <receiver
+            android:name=".CalendarWidget"
+            android:exported="true"
+            android:label="@string/widget_cal_title">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/calendar_widget_info" />
+        </receiver>
+
+        <!-- виджет «Тело»: вес, путь к цели и график -->
+        <receiver
+            android:name=".BodyWidget"
+            android:exported="true"
+            android:label="@string/widget_body_title">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/body_widget_info" />
+        </receiver>
+
+        <!-- виджет «Столпы»: правила дня со стриком, отметка ✓ / ✗ -->
+        <receiver
+            android:name=".VowsWidget"
+            android:exported="true"
+            android:label="@string/widget_vows_title">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/vows_widget_info" />
+        </receiver>
+
+        <!-- виджет «Покупки»: что купить, «куплено» и «+» -->
+        <receiver
+            android:name=".ShopWidget"
+            android:exported="true"
+            android:label="@string/widget_shop_title">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/shop_widget_info" />
+        </receiver>
+
+        <!-- виджет «Еда»: что съедено сегодня и «+» -->
+        <receiver
+            android:name=".FoodWidget"
+            android:exported="true"
+            android:label="@string/widget_food_title">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/food_widget_info" />
+        </receiver>
+
+        <!-- виджет «Голодание»: кольцо к цели и неделя окон еды и голода -->
+        <receiver
+            android:name=".FastWidget"
+            android:exported="true"
+            android:label="@string/widget_fast_title">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/fast_widget_info" />
+        </receiver>
+
+        <!-- виджет «Важное»: закреплённые карточки (pin: true) -->
+        <receiver
+            android:name=".PinsWidget"
+            android:exported="true"
+            android:label="@string/widget_pins_title">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/pins_widget_info" />
+        </receiver>
+
+        <!-- виджет «Захват»: пять кнопок быстрого ввода -->
+        <receiver
+            android:name=".CaptureWidget"
+            android:exported="true"
+            android:label="@string/widget_capture_title">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/capture_widget_info" />
+        </receiver>
+
+
+        <!-- виджет «Цели»: OKR с графиком пути к сроку -->
+        <receiver
+            android:name=".GoalsWidget"
+            android:exported="true"
+            android:label="@string/widget_goals_title">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/goals_widget_info" />
+        </receiver>
+
+        <!-- смена неба (рассвет, день, закат, ночь): пересобрать виджеты -->
+        <receiver
+            android:name=".Sky$Tick"
+            android:exported="false" />
+
+        <!-- итог установки обновления: окно «Обновить?» или причина отказа -->
+        <receiver
+            android:name=".AppUpdate$Result"
+            android:exported="false" />
+
+        <service
+            android:name=".TodayWidgetService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <service
+            android:name=".VowsWidgetService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <service
+            android:name=".ShopWidgetService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <service
+            android:name=".FoodWidgetService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+
+        <service
+            android:name=".GoalsWidgetService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <service
+            android:name=".PinsWidgetService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+    </application>
+</manifest>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Квадрат «выполнено» на тёмном небе: рисуется 18dp, нажимается вся клетка 36dp. -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android" android:inset="9dp">
+    <shape android:shape="rectangle">
+        <stroke android:width="1.5dp" android:color="#3EE08A" />
+        <corners android:radius="4dp" />
+    </shape>
+</inset>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Превью (тёмное небо) «Столпов»: шапка и три правила со стриком и кнопками ✓ ✗.
+     Лаунчеры Xiaomi без картинки показывают пустую плитку — не найти. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="250dp"
+    android:height="130dp"
+    android:viewportWidth="250"
+    android:viewportHeight="130">
+    <path android:fillColor="#FF0D1A24" android:strokeColor="#1F78FFB4" android:strokeWidth="1"
+        android:pathData="M16,0.5 h218 a15.5,15.5 0 0 1 15.5,15.5 v98 a15.5,15.5 0 0 1 -15.5,15.5 h-218 a15.5,15.5 0 0 1 -15.5,-15.5 v-98 a15.5,15.5 0 0 1 15.5,-15.5 z" />
+    <path android:fillColor="#8EE4AF" android:pathData="M14,12 h48 v6 h-48 z" />
+    <path android:fillColor="#A7BDB3" android:pathData="M70,13 h50 v4 h-50 z" />
+    <!-- правила -->
+    <path android:fillColor="#E6F2EA" android:pathData="M14,36 h70 v6 h-70 z M14,70 h90 v6 h-90 z M14,104 h60 v6 h-60 z" />
+    <path android:fillColor="#A7BDB3" android:pathData="M14,46 h100 v4 h-100 z M14,80 h80 v4 h-80 z M14,114 h110 v4 h-110 z" />
+    <path android:fillColor="#D9A48A" android:pathData="M150,40 h18 v5 h-18 z M150,74 h18 v5 h-18 z M150,108 h18 v5 h-18 z" />
+    <!-- ✓ залитые и ✗ рамкой -->
+    <path android:fillColor="#3EE08A" android:pathData="M180,32 h24 v20 h-24 z M180,66 h24 v20 h-24 z" />
+    <path android:strokeColor="#3EE08A" android:strokeWidth="1" android:pathData="M180,100 h24 v20 h-24 z" />
+    <path android:strokeColor="#FF7A57" android:strokeWidth="1" android:pathData="M210,32 h24 v20 h-24 z M210,66 h24 v20 h-24 z M210,100 h24 v20 h-24 z" />
+</vector>

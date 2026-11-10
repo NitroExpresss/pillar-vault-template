@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Виджет «Столпы»: та же шапка, что у «Сегодня»; «+» спрятан в коде. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_bg_night"
+    android:orientation="vertical"
+    android:paddingStart="12dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="6dp"
+    android:paddingBottom="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/widget_title"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_vertical"
+            android:text="@string/widget_vows_title"
+            android:textColor="#8EE4AF"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/widget_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:fontFamily="monospace"
+            android:singleLine="true"
+            android:textColor="#7B9476"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/widget_add"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:contentDescription="@string/widget_add"
+            android:gravity="center"
+            android:text="+"
+            android:textColor="#5CDB95"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/widget_refresh"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:contentDescription="@string/widget_refresh"
+            android:gravity="center"
+            android:text="↻"
+            android:textColor="#5CDB95"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ListView
+            android:id="@+id/widget_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:dividerHeight="0dp" />
+
+        <TextView
+            android:id="@+id/widget_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/widget_loading_short"
+            android:textColor="#7B9476"
+            android:textSize="13sp" />
+    </FrameLayout>
+</LinearLayout>

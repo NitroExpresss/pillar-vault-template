@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Превью (тёмное небо) «Захвата»: заголовок и шесть плиток в ряд. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="250dp"
+    android:height="70dp"
+    android:viewportWidth="250"
+    android:viewportHeight="70">
+    <path android:fillColor="#FF0D1A24" android:strokeColor="#1F78FFB4" android:strokeWidth="1"
+        android:pathData="M16,0.5 h218 a15.5,15.5 0 0 1 15.5,15.5 v38 a15.5,15.5 0 0 1 -15.5,15.5 h-218 a15.5,15.5 0 0 1 -15.5,-15.5 v-38 a15.5,15.5 0 0 1 15.5,-15.5 z" />
+    <path android:fillColor="#8EE4AF" android:pathData="M12,9 h40 v6 h-40 z" />
+    <path android:fillColor="#1AFFFFFF" android:strokeColor="#1F78FFB4" android:strokeWidth="1"
+        android:pathData="M10,24 h35 v36 h-35 z M49,24 h35 v36 h-35 z M88,24 h35 v36 h-35 z M127,24 h35 v36 h-35 z M166,24 h35 v36 h-35 z M205,24 h35 v36 h-35 z" />
+    <path android:fillColor="#E6F2EA" android:pathData="M18,40 h19 v4 h-19 z M57,40 h19 v4 h-19 z M96,40 h19 v4 h-19 z M135,40 h19 v4 h-19 z M174,40 h19 v4 h-19 z M213,40 h19 v4 h-19 z" />
+</vector>

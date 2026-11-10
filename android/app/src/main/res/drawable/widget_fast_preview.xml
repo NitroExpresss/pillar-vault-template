@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Превью (тёмное небо) «Голодания»: кольцо слева, неделя полос справа. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="250dp"
+    android:height="150dp"
+    android:viewportWidth="250"
+    android:viewportHeight="150">
+    <path android:fillColor="#FF0D1A24" android:strokeColor="#1F78FFB4" android:strokeWidth="1"
+        android:pathData="M16,0.5 h218 a15.5,15.5 0 0 1 15.5,15.5 v118 a15.5,15.5 0 0 1 -15.5,15.5 h-218 a15.5,15.5 0 0 1 -15.5,-15.5 v-118 a15.5,15.5 0 0 1 15.5,-15.5 z" />
+    <path android:fillColor="#8EE4AF" android:pathData="M14,14 h60 v6 h-60 z" />
+    <path android:strokeColor="#2A3F46" android:strokeWidth="8" android:pathData="M60,48 a36,36 0 1 1 0,72 a36,36 0 1 1 0,-72" />
+    <path android:strokeColor="#3EE08A" android:strokeWidth="8" android:pathData="M60,48 a36,36 0 0 1 36,36 a36,36 0 0 1 -20,32" />
+    <path android:fillColor="#E6F2EA" android:pathData="M46,80 h28 v6 h-28 z" />
+    <path android:fillColor="#2A3F46" android:pathData="M118,46 h118 v8 h-118 z M118,62 h118 v8 h-118 z M118,78 h118 v8 h-118 z M118,94 h118 v8 h-118 z M118,110 h118 v8 h-118 z" />
+    <path android:fillColor="#663EE08A" android:pathData="M118,46 h70 v8 h-70 z M150,62 h86 v8 h-86 z M118,78 h118 v8 h-118 z M118,94 h40 v8 h-40 z M170,110 h40 v8 h-40 z" />
+    <path android:fillColor="#FF7A57" android:pathData="M190,46 h4 v8 h-4 z M146,62 h4 v8 h-4 z M160,94 h4 v8 h-4 z M166,110 h4 v8 h-4 z" />
+</vector>

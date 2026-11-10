@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Окно ввода виджетов: дело на сегодня (своё или из всех открытых),
+     покупка (текст и раздел), запись в дневник или мысль в inbox.
+     Цвета задаёт WidgetAdd по небу. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/add_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/widget_bg_night"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/add_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/add_title"
+        android:textColor="#8EE4AF"
+        android:textSize="17sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/add_text"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="#131A15"
+            android:hint="@string/add_hint"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:inputType="textCapSentences"
+            android:maxLength="300"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:singleLine="true"
+            android:textColor="#EDF5E1"
+            android:textColorHint="#7B9476"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/add_go"
+            android:layout_width="52dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:background="#5CDB95"
+            android:contentDescription="@string/add_go"
+            android:text="+"
+            android:textColor="#0A0C0B"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/add_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="#C79C88"
+        android:textSize="13sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/add_pick_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/add_pick"
+        android:textColor="#7B9476"
+        android:textSize="13sp"
+        android:visibility="gone" />
+
+    <!-- высоту списка ограничивает код: окно не должно вырасти на весь экран -->
+    <ListView
+        android:id="@+id/add_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:divider="#1E2620"
+        android:dividerHeight="1dp"
+        android:visibility="gone" />
+</LinearLayout>

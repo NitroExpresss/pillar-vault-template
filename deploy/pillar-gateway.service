@@ -1,0 +1,36 @@
+[Unit]
+Description=Pillar Gateway — локальный шлюз к LLM-провайдерам для Pillar Vault
+Documentation=file:/opt/pillar-vault/deploy/GATEWAY.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+
+# ⚠ Тот же пользователь, что у pillar-vault.service (владелец /opt/pillar-vault).
+# Одной командой при установке:
+#   sudo sed -i "s/^User=.*/User=$USER/;s/^Group=.*/Group=$(id -gn)/" \
+#        /etc/systemd/system/pillar-gateway.service
+User=deploy
+Group=deploy
+
+WorkingDirectory=/opt/pillar-vault
+ExecStart=/opt/pillar-vault/gateway/pillar-gateway -addr 127.0.0.1:18789 -config /opt/pillar-vault/gateway/providers.json
+
+Restart=always
+RestartSec=5
+
+# Песочница лёгкая: в отличие от pillar-vault.service сеть НЕ режем —
+# шлюз ходит к api.x.ai и другим провайдерам. Слушает только петлю
+# (адрес зашит в ExecStart, сам бинарь откажется от внешнего адреса).
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+# Читается через: journalctl -u pillar-gateway -f
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

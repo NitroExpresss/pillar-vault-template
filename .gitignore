@@ -1,0 +1,59 @@
+# конфиг Obsidian — локальный для каждой машины, в репозитории не нужен
+.obsidian/
+inbox/raw/
+
+# Индекс больше не пишется на диск — он живёт в памяти сервера. Строка
+# осталась сторожем: у старых копий хранилища файл ещё лежит рядом,
+# и полмегабайта служебной сборки не должны уехать в коммит.
+viewer/data.js
+viewer/data.public.js
+
+# бинарь бэкенда — собирается на месте
+server/pillar-vault-server
+server/pillar-vault-server.exe
+
+# локальный пароль от замка — только на этой машине
+server/.passhash
+
+# ключи LLM-провайдеров (server/connections.go) — только на этой машине
+server/.connections.json
+server/.connections.json.tmp
+
+# ключи провайдеров для локального шлюза (gateway/main.go) — только на сервере
+gateway/providers.json
+
+# бинарь шлюза — собирается на месте
+gateway/pillar-gateway
+
+# флажок автокоммита правок с веба — включается на сервере, не у разработчика
+server/.autocommit
+
+# журнал входов (server/access.go) — адреса и устройства, не для git
+server/.logins.log
+server/.passhash.tmp
+
+# бинарь, собранный в корне (go build ./...)
+server.exe
+pillar-vault-server
+
+# Наследство докера: хэш пароля жил в .env рядом с compose.yaml. Docker снят
+# 2026-09-09, пароль переехал в server/.passhash. Строки оставлены сторожем:
+# файл с ключом не должен уехать в git, даже если его снова заведут руками.
+.env
+.env.bak.*
+
+# APK для кнопки «Обновить приложение»: deploy.sh достаёт его из ветки
+# android-apk, сервер отдаёт по сессии (server/appupdate.go)
+server/app/
+
+# deploy.sh: коммит последней удачной сборки и коммит, на котором она упала
+server/.built
+server/.build-failed
+
+# React-приложение: собранное — в viewer/x/ (deploy.sh из ветки web-dist,
+# локально — npm run build и копия), исходники — в web/
+viewer/x/
+viewer/x.new/
+viewer/x.old/
+web/node_modules/
+web/dist/

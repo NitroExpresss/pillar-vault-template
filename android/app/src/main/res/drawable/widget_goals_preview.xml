@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Превью (тёмное небо) «Целей»: заголовок, цель с темпом и график — пунктир темпа и линии результатов. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="250dp"
+    android:height="110dp"
+    android:viewportWidth="250"
+    android:viewportHeight="110">
+    <path android:fillColor="#FF0D1A24" android:strokeColor="#1F78FFB4" android:strokeWidth="1"
+        android:pathData="M16,0.5 h218 a15.5,15.5 0 0 1 15.5,15.5 v78 a15.5,15.5 0 0 1 -15.5,15.5 h-218 a15.5,15.5 0 0 1 -15.5,-15.5 v-78 a15.5,15.5 0 0 1 15.5,-15.5 z" />
+    <path android:fillColor="#8EE4AF" android:pathData="M14,12 h40 v6 h-40 z" />
+    <path android:fillColor="#E6F2EA" android:pathData="M14,28 h90 v5 h-90 z" />
+    <path android:fillColor="#FF7A57" android:pathData="M190,28 h46 v5 h-46 z" />
+    <path android:strokeColor="#A7BDB3" android:strokeWidth="1" android:pathData="M18,96 L232,46" />
+    <path android:strokeColor="#3987E5" android:strokeWidth="2" android:pathData="M18,96 L60,86 L100,80 L150,72" />
+    <path android:strokeColor="#D95926" android:strokeWidth="2" android:pathData="M18,96 L60,84 L110,78 L150,78" />
+</vector>

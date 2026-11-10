@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Виджет «Голодание»: кольцо к цели с живым секундомером голода, справа —
+     неделя окон еды и голода. Картинки рисует FastWidget под размер. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fast_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_bg_night"
+    android:orientation="vertical"
+    android:paddingStart="12dp"
+    android:paddingTop="6dp"
+    android:paddingEnd="6dp"
+    android:paddingBottom="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/fast_title"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_vertical"
+            android:text="@string/widget_fast_title"
+            android:textColor="#8EE4AF"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/fast_stage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="#A7BDB3"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/fast_add"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:contentDescription="@string/widget_food_add"
+            android:gravity="center"
+            android:text="+"
+            android:textColor="#5CDB95"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/fast_refresh"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:contentDescription="@string/widget_refresh"
+            android:gravity="center"
+            android:text="↻"
+            android:textColor="#5CDB95"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="104dp"
+            android:layout_height="104dp">
+
+            <ImageView
+                android:id="@+id/fast_ring"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:importantForAccessibility="no"
+                android:scaleType="fitCenter" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Chronometer
+                    android:id="@+id/fast_timer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="#E6F2EA"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/fast_of"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#A7BDB3"
+                    android:textSize="10sp" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/fast_week"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:importantForAccessibility="no"
+            android:scaleType="fitCenter" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/fast_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#C79C88"
+        android:textSize="11sp"
+        android:visibility="gone" />
+</LinearLayout>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- фон и мятный акцент из viewer/style.css -->
+    <color name="bg">#0A0C0B</color>
+    <color name="accent">#5CDB95</color>
+</resources>

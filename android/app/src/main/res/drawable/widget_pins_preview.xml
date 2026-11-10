@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Превью (тёмное небо) «Важного»: шапка и закреплённые карточки — заголовок и строка под ним. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="250dp"
+    android:height="110dp"
+    android:viewportWidth="250"
+    android:viewportHeight="110">
+    <path android:fillColor="#FF0D1A24" android:strokeColor="#1F78FFB4" android:strokeWidth="1"
+        android:pathData="M16,0.5 h218 a15.5,15.5 0 0 1 15.5,15.5 v78 a15.5,15.5 0 0 1 -15.5,15.5 h-218 a15.5,15.5 0 0 1 -15.5,-15.5 v-78 a15.5,15.5 0 0 1 15.5,-15.5 z" />
+    <path android:fillColor="#8EE4AF" android:pathData="M14,12 h52 v6 h-52 z" />
+    <path android:fillColor="#E6F2EA" android:pathData="M14,34 h110 v6 h-110 z M14,64 h90 v6 h-90 z" />
+    <path android:fillColor="#A7BDB3" android:pathData="M14,45 h170 v4 h-170 z M14,75 h150 v4 h-150 z M14,90 h120 v4 h-120 z" />
+</vector>

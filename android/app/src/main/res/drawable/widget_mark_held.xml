@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- «Держал» на тёмном небе — залито зелёным. 32dp внутри клетки 40dp. -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android" android:inset="4dp">
+    <shape android:shape="rectangle">
+        <solid android:color="#3EE08A" />
+        <corners android:radius="10dp" />
+    </shape>
+</inset>

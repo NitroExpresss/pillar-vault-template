@@ -1,0 +1,50 @@
+# Сборка React-приложения (web/) и выкладка в ветку web-dist.
+# deploy.sh на VDS достаёт её в viewer/x/ — Node на сервере не нужен,
+# как и Gradle для APK (тот же приём, ветка android-apk).
+# Переход интерфейса — plans/react-migration.md.
+name: web
+
+on:
+  push:
+    branches: [main]
+    paths: ["web/**", ".github/workflows/web.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: web
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Зависимости — строго по lock-файлу
+        working-directory: web
+        run: npm ci --no-audit --no-fund
+      - name: Типы и сборка
+        working-directory: web
+        run: npm run build
+
+      # Один перезаписываемый коммит: история сборок в git не нужна, а
+      # сервер сверяет с ней только «изменилось ли» (как с android-apk).
+      - name: В ветку web-dist
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd web/dist
+          printf '{"sha":"%s","run":%s}\n' "${GITHUB_SHA::7}" "$GITHUB_RUN_NUMBER" > build.json
+          git init -q -b web-dist
+          git add -A
+          git -c user.name="github-actions" -c user.email="actions@github.com" \
+            commit -qm "web: сборка #${GITHUB_RUN_NUMBER} из ${GITHUB_SHA::7}"
+          git push -qf "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" web-dist
